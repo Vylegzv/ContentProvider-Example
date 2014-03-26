@@ -12,7 +12,7 @@ public class MiniTwitterContract {
 	/** User **/
 	public static final class User implements BaseColumns {
 		
-		public static final Uri CONTENT_UTI = Uri.withAppendedPath(AUTHORITY_URI,  "user");
+		public static final Uri CONTENT_URI = Uri.withAppendedPath(AUTHORITY_URI,  "user");
 		
 		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/com.example.contentprovider.user";
 		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/com.example.contentprovider.user";
@@ -28,7 +28,7 @@ public class MiniTwitterContract {
 	/** Tweet **/
 	public static final class Tweet implements BaseColumns {
 		
-		public static final Uri CONTENT_UTI = Uri.withAppendedPath(AUTHORITY_URI,  "tweet");
+		public static final Uri CONTENT_URI = Uri.withAppendedPath(AUTHORITY_URI,  "tweet");
 		
 		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/com.example.contentprovider.tweet";
 		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/com.example.contentprovider.tweet";
@@ -45,7 +45,7 @@ public class MiniTwitterContract {
 	/** Follow **/
 	public static final class Follow implements BaseColumns {
 		
-		public static final Uri CONTENT_UTI = Uri.withAppendedPath(AUTHORITY_URI,  "follow");
+		public static final Uri CONTENT_URI = Uri.withAppendedPath(AUTHORITY_URI,  "follow");
 		
 		public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/com.example.contentprovider.follow";
 		public static final String CONTENT_TYPE = "vnd.android.cursor.dir/com.example.contentprovider.follow";
