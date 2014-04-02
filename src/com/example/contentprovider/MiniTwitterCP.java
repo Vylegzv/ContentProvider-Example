@@ -5,6 +5,8 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
@@ -127,4 +129,38 @@ public class MiniTwitterCP extends ContentProvider{
 	
 	
 
+	@Override
+	public int bulkInsert(Uri uri, ContentValues[] values){
+		
+		int numInserted = 0;
+		String table = null;
+		
+		switch(uriMatcher.match(uri)){
+		
+		case USER:
+			table = MiniTwitterContract.User.TABLE;
+			break;
+		}		
+		
+		SQLiteDatabase myDB = myDbOpenHelper.getWritableDatabase();
+		myDB.beginTransaction();
+		
+		try{
+			for(ContentValues cv : values){
+				long newID = myDB.insertOrThrow(table, null, cv);
+				if(newID <= 0){
+					throw new SQLException("Failed to insert row into " + uri);
+				}
+			}
+			
+			myDB.setTransactionSuccessful();
+			getContext().getContentResolver().notifyChange(uri, null);
+			numInserted = values.length;
+		}finally{
+			myDB.endTransaction();
+		}
+		
+		return numInserted;
+	}
+	
 }
